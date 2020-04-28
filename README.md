@@ -41,8 +41,8 @@ The **state space** has 37 dimensions and contains the agent's velocity, along w
 
     (_For AWS_) If you'd like to train the agent on AWS (and have not [enabled a virtual screen](https://github.com/Unity-Technologies/ml-agents/blob/master/docs/Training-on-Amazon-Web-Service.md)), then please use [this link](https://s3-us-west-1.amazonaws.com/udacity-drlnd/P1/Banana/Banana_Linux_NoVis.zip) to obtain the environment.
 
-3. Place the file in the `p1_navigation/` folder in the DRLND GitHub repository (from step one), and unzip (or decompress) the file.
+3. Place the file in the `p1_navigation/` folder in the Udacity Deep RL repository (from step one), and unzip (or decompress) the file.
 
 ### Training Agents
 
-Follow along in `Navigation.ipynb` to get started with training agents! Details about all the currently implemented agents can be found in the report [here](report.md).
+Follow along in the [Navigation Notebook](Navigation.ipynb) to get started with training agents! Details about all the currently implemented agents can be found in the report [here](report.md).
