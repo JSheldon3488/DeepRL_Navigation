@@ -32,6 +32,31 @@ This section covers all the RL Agents that were implemented to solve goal for th
 </p>
  
  ### Double Deep Q-Network
+This agent is a Double Deep Q-Network similar to the one designed in this [paper](https://arxiv.org/pdf/1509.06461.pdf).
+This agent is very similar to the Deep Q-Network but it decouples action selection from action evaluation.
+The local network is used for argmax action selection and the target network is used for evaluation. This solves the
+overoptimistic value estimates that occur when the same network is used for both selection and evaluation, and leads to
+a more accurate function approximation.
+
+ **Neural Network Architecture:**
+ Four fully connected layers with relu activation functions. Using Adam optimizer with a learning rate of 0.0005.
+ * Layer1: State_Size(37), 128
+ * Layer2: 128, 64
+ * Layer3: 64, 32
+ * Layer4: 32, action_size(4)
+ 
+ **Hyperparameters:** 
+* Replay Buffer Size: 100,000
+* Batch Size: 64
+* Discount Rate: 0.99 (Q-Value Calculations)
+* Network Update Rate (Tau): 0.001
+* Learning Rate: 0.0005 (Neural Network)
+* Update Rate: 4 (how often to update networks)
+
+**Results:**
+<p align="center">
+    <img src="/images/Double_DQN_Agent_.png">
+</p>
  
  ## Dueling Deep Q-Network
  
