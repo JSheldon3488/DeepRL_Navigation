@@ -10,7 +10,7 @@ from p1_navigation.agent_utils import ReplayBuffer
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 
-class Agent():
+class DQN_Agent():
     """Object that can interact with and learn from an environment."""
 
     def __init__(self, state_size, action_size, seed):
@@ -125,7 +125,7 @@ class Agent():
             target_param.data.copy_(tau * local_param.data + (1.0 - tau) * target_param.data)
 
 
-class DoubleDQN_Agent(Agent):
+class DoubleDQN_Agent(DQN_Agent):
     """Double DQN Agent that interacts with and learns from the environment"""
 
     def __init__(self, state_size, action_size, seed):
