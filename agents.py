@@ -94,7 +94,7 @@ class Agent():
         :param experiences: tuple of (s,a,r,s',done) tuples Tuple[torch.Variable])
         :param gamma: discount factor for update equation
         """
-        # unpack experiences
+        # Unpack Experiences
         states, actions, rewards, next_states, dones = experiences
 
         # ---------------  DQN Update Method ---------------- #
@@ -123,6 +123,50 @@ class Agent():
         """
         for target_param, local_param in zip(target_model.parameters(), local_model.parameters()):
             target_param.data.copy_(tau * local_param.data + (1.0 - tau) * target_param.data)
+
+
+class DoubleDQN_Agent(Agent):
+    """Double DQN Agent that interacts with and learns from the environment"""
+
+    def __init__(self, state_size, action_size, seed):
+        """Initialize a Double DQN Agent object using inheritance from Agent.
+
+        :param state_size: (int) dimension of each state
+        :param action_size: (int) number of possible actions
+        :param seed: random seed used for reproducible results
+        """
+        super().__init__(state_size, action_size, seed)
+
+    def __str__(self):
+        return "Double_DQN_Agent"
+
+    def learn(self, experiences, gamma):
+        """Update value parameters using given batch of experience tuples. (Double DQN)
+
+        :param experiences: tuple of (s,a,r,s',done) tuples Tuple[torch.Variable])
+        :param gamma: discount factor for update equation
+        """
+        # Unpack Experiences
+        states, actions, rewards, next_states, dones = experiences
+
+        #-------------------- Double DQN Update -------------------#
+        # Find max actions for next states based on the local_network
+        local_argmax_actions = self.qnetwork_local(next_states).detach().argmax(dim=1).unsqueeze(1)
+        # Use local_best_actions and target_network to get predicted value for next states
+        next_qvalues = self.qnetwork_target(next_states).gather(1,local_argmax_actions).detach()
+
+        #          Everything else same as DQN             #
+        # Compute Q target values for current states (1-dones computes to 0 if next state is terminal)
+        td_target_values = rewards + (gamma * next_qvalues * (1 - dones))
+        # Get expected Q values from local model for all actions taken
+        prev_qvalues = self.qnetwork_local(states).gather(1, actions)
+
+        # Compute loss
+        loss = F.mse_loss(td_target_values, prev_qvalues)
+        # Minimize the loss
+        self.optimizer.zero_grad()
+        loss.backward()
+        self.optimizer.step()
 
 
 class ReplayBuffer:
