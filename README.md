@@ -43,6 +43,13 @@ The **state space** has 37 dimensions and contains the agent's velocity, along w
 
 3. Place the file in the `p1_navigation/` folder in the Udacity Deep RL repository (from step one), and unzip (or decompress) the file.
 
-### Training Agents
+### Instructions
 
-Follow along in the [Navigation Notebook](Navigation.ipynb) to get started with training agents! Details about all the currently implemented agents can be found in the report [here](report.md).
+Follow along in the [Navigation Notebook](Navigation.ipynb) to see how to train and watch agents in an enviornment! Details about all the currently implemented agents can be found in the report [here](report.md).
+
+If you want to train the agents yourself you need to change the booleans to True at the end of the section "3. Take Actions and learn in the Environment".
+
+If you want to just visualize an already trained agents run section "4. Watch Trained Agent". 
+
+If you would just like to see the learning results
+of different agents run section "5. Show the results".
