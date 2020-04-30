@@ -40,10 +40,10 @@ class Dueling_QNetwork(nn.Module):
         :param seed: Random seed
         """
         super(Dueling_QNetwork, self).__init__()
-        self.seed = torch.manager_seed(seed)
+        self.seed = torch.manual_seed(seed)
         # Shared Layers
         self.fc1 = nn.Linear(state_size, 128)
-        self.fc2 = nn.Linear(128, 64)
+        self.fc2 = nn.Linear(128,64)
 
         # Individual Layers
         self.fc_value = nn.Linear(64,32)
@@ -58,10 +58,8 @@ class Dueling_QNetwork(nn.Module):
         x = F.relu(self.fc2(x))
 
         # Individual Layers
-        state_value = F.relu(self.fc_value(x))
-        action_advantage = F.relu(self.fc_action(x))
-        state_value = self.state_value(state_value)
-        action_advantage = self.action_advantage(action_advantage)
-
-        # Combine for final value using equation (9) from paper
-        return state_value + (action_advantage - action_advantage.mean())
+        a = F.relu(self.fc_action(x))
+        action_advantage = self.action_advantage(a)
+        v = F.relu(self.fc_value(x))
+        state_value = self.state_value(v)
+        return state_value + (action_advantage - action_advantage.mean(dim=1, keepdim=True))

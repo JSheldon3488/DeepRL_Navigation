@@ -3,7 +3,7 @@ import random
 import torch
 import torch.nn.functional as F
 import torch.optim as optim
-from p1_navigation.neural_network import QNetwork
+from p1_navigation.neural_networks import QNetwork, Dueling_QNetwork
 from p1_navigation.agent_utils import ReplayBuffer
 
 # Set up to run on GPU or CPU
@@ -129,7 +129,7 @@ class DoubleDQN_Agent(DQN_Agent):
     """Double DQN Agent that interacts with and learns from the environment"""
 
     def __init__(self, state_size, action_size, seed):
-        """Initialize a Double DQN Agent object using inheritance from Agent.
+        """Initialize a Double DQN Agent object using inheritance from DQN_Agent.
 
         :param state_size: (int) dimension of each state
         :param action_size: (int) number of possible actions
@@ -167,3 +167,24 @@ class DoubleDQN_Agent(DQN_Agent):
         self.optimizer.zero_grad()
         loss.backward()
         self.optimizer.step()
+
+
+class Dueling_DDQN_Agent(DoubleDQN_Agent):
+    "Dueling DQN Agent is the same as the Double DQN Agent except for the neural netowrks architecture"
+
+    def __init__(self, state_size, action_size, seed):
+        """Initialize a Dueling Double DQN Agent object using inheritance from Double DQN Agent.
+
+        :param state_size: (int) dimension of each state
+        :param action_size: (int) number of possible actions
+        :param seed: random seed used for reproducible results
+        """
+        super().__init__(state_size, action_size, seed)
+        # Use Dueling Network Architecture instead
+        self.qnetwork_local = Dueling_QNetwork(state_size, action_size, seed).to(device)
+        self.qnetwork_target = Dueling_QNetwork(state_size, action_size, seed).to(device)
+        self.optimizer = optim.Adam(self.qnetwork_local.parameters(), lr=self.learning_rate)
+
+
+    def __str__(self):
+        return "Dueling_DDQN_Agent"
