@@ -3,7 +3,8 @@ Starter code and project details can be found [here](https://github.com/udacity/
 
 ## Agents
 This section covers all the RL Agents that were implemented to solve goal for this environment. Each section will have an explanation of the agent and neural network used by that agent,
- a graph showing the results of that agents learning in the environment, and references to the papers relevant to that agent.
+ a graph showing the results of that agents learning in the environment, and references to the papers relevant to that agent. Note that all Agents were run for 5 times for 1500 episodes 
+ and the reuslts are an average of those 5 simulations.
  
  ### Deep Q-Network
  This agent is a Deep Q-Netork Agent similar to the one designed in this [paper](https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf). 
@@ -59,6 +60,7 @@ a more accurate function approximation.
 </p>
  
  ## Dueling Deep Q-Network
+ [paper](https://arxiv.org/pdf/1511.06581.pdf).
  
  ## Comparisons
  This section compares the RL Agents.
