@@ -46,6 +46,7 @@ The **state space** has 37 dimensions and contains the agent's velocity, along w
 ### Instructions
 
 Follow along in the [Navigation Notebook](Navigation.ipynb) to see how to train and watch agents in an enviornment! Details about all the currently implemented agents can be found in the report [here](report.md).
+Make sure to run Section "1. Start the Environment" and Section "2. Examine the State and Action Spaces" to set up the environment.
 
 If you want to train the agents yourself you need to change the booleans to True at the end of the section "3. Take Actions and learn in the Environment".
 
