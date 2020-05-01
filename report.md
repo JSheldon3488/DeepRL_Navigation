@@ -62,7 +62,7 @@ a more accurate function approximation.
 </p>
  
  
- ## Dueling Deep Q-Network
+ ### Dueling Deep Q-Network
  This agent is a DDQN agent similar in every way to the Double Deep Q-Network agent except that it now uses the Dueling architecture for the neural network as described in this [paper](https://arxiv.org/pdf/1511.06581.pdf).
  This new network seperates state value evaluation and action advantage evaluation. The intuition is that this allows you to learn the value of states more efficiently
  because each pass through the network updates the state value parameters instead of just updating the state,action parameters together. Also this leads to better evaluations in states
@@ -99,7 +99,12 @@ a more accurate function approximation.
  
  
  ## Comparisons
- This section compares the currently implemented RL Agents.
+ This section compares the currently implemented RL Agents. All agents pretty much have the same results. I think Dueling DDQN 
+ would show improvements in more complex environments, but this environment is relatively simple.
+ 
+ <p align="center">
+    <img src="/images/DQN_Agent_Double_DQN_Agent_Dueling_DDQN_Agent_.png">
+</p>
  
  
  ## Future Ideas
